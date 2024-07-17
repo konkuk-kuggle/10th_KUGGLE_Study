@@ -5,6 +5,13 @@ from github import Github
 
 # 환경 변수에서 GitHub 토큰 가져오기
 GITHUB_TOKEN = os.getenv('MY_GITHUB_TOKEN')
+
+# GitHub 토큰 값 출력 (디버깅용)
+print(f"GITHUB_TOKEN: {GITHUB_TOKEN}")
+
+if not GITHUB_TOKEN:
+    raise ValueError("GitHub token is missing!")
+
 REPO_OWNER = 'konkuk-kuggle'
 REPO_NAME = '10th_Study_CS231n'
 
@@ -29,7 +36,7 @@ repo = g.get_repo(f"{REPO_OWNER}/{REPO_NAME}")
 
 # PR 제목에서 주차와 참여자 이름 추출하는 함수
 def extract_info_from_title(title):
-    match = re.match(r"Week_([0-9]+)\s+(.*)", title)
+    match = re.match(r"Week_([0-9]+)\ (.*)", title)
     if match:
         week = int(match.group(1))
         name = match.group(2).strip()
@@ -38,6 +45,7 @@ def extract_info_from_title(title):
 
 # 제출 상태 업데이트 함수
 def update_submission_status(week, name):
+    print(f"Updating submission status for Week {week}, {name}")
     with open('README.md', 'r') as file:
         lines = file.readlines()
 
@@ -61,6 +69,7 @@ def update_submission_status(week, name):
 def handle_pr_event():
     pr_title = os.getenv('GITHUB_HEAD_REF', '')
     pr_created_at = datetime.strptime(os.getenv('GITHUB_EVENT_PR_CREATED_AT'), "%Y-%m-%dT%H:%M:%SZ")
+    print(f"PR Title: {pr_title}, Created At: {pr_created_at}")
 
     week, name = extract_info_from_title(pr_title)
     if week and name:
