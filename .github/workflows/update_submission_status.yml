@@ -40,9 +40,8 @@ jobs:
 
       - name: Check GITHUB_TOKEN
         run: |
-          echo "TEST : ${{env.MY_GITHUB_TOKEN}}"
           echo "MY_GITHUB_TOKEN: ${{ secrets.MY_GITHUB_TOKEN }}"
-          if [ -z "${{ env.MY_GITHUB_TOKEN }}" ]; then
+          if [ -z "${{ secrets.MY_GITHUB_TOKEN }}" ]; then
             echo "MY_GITHUB_TOKEN is not set"
             exit 1
           else
@@ -52,7 +51,7 @@ jobs:
       - name: Run update script
         run: python update_submission_status.py
         env:
-          MY_GITHUB_TOKEN: ${{ env.MY_GITHUB_TOKEN }}
+          MY_GITHUB_TOKEN: ${{ secrets.MY_GITHUB_TOKEN }}
           GITHUB_HEAD_REF: ${{ env.PR_TITLE }}
           GITHUB_EVENT_PR_CREATED_AT: ${{ env.PR_CREATED_AT }}
           WEEK: ${{ env.WEEK }}
