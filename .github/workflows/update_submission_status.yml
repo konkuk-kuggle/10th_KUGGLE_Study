@@ -41,7 +41,7 @@ jobs:
       - name: Check GITHUB_TOKEN
         run: |
           echo "TEST : ${{env.MY_GITHUB_TOKEN}}"
-          echo "MY_GITHUB_TOKEN: ${{ env.MY_GITHUB_TOKEN }}"
+          echo "MY_GITHUB_TOKEN: ${{ secrets.MY_GITHUB_TOKEN }}"
           if [ -z "${{ env.MY_GITHUB_TOKEN }}" ]; then
             echo "MY_GITHUB_TOKEN is not set"
             exit 1
