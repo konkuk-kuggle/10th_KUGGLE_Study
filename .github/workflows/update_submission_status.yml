@@ -2,6 +2,7 @@ name: Update Submission Status
 
 on:
   pull_request:
+    types: [opened, synchronize]
     branches:
       - '*'
 
