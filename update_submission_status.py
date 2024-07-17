@@ -3,13 +3,17 @@ import re
 from datetime import datetime
 from github import Github
 
-# 환경 변수에서 GitHub 토큰 가져오기 
+# 환경 변수에서 GitHub 토큰 가져오기
 GITHUB_TOKEN = os.getenv('MY_GITHUB_TOKEN')
+
+# GitHub 토큰 값 출력 (디버깅용)
+print(f"GITHUB_TOKEN: {GITHUB_TOKEN}")
+
+if not GITHUB_TOKEN:
+    raise ValueError("GitHub token is missing!")
+
 REPO_OWNER = 'konkuk-kuggle'
 REPO_NAME = '10th_Study_CS231n'
-
-# GitHub 토큰 값 출력 (디버깅용, 이후 삭제)
-print(f"GITHUB_TOKEN: {GITHUB_TOKEN}")
 
 # 참여 인원 목록
 participants = ["김동환", "우동협", "장윤영", "정명훈", "진태완", "최종렬", "한서연"]
