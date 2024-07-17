@@ -3,7 +3,7 @@ import re
 from datetime import datetime
 from github import Github
 
-# 환경 변수에서 GitHub 토큰 가져오기
+# 환경 변수에서 GitHub 토큰 가져오기 
 GITHUB_TOKEN = os.getenv('MY_GITHUB_TOKEN')
 REPO_OWNER = 'konkuk-kuggle'
 REPO_NAME = '10th_Study_CS231n'
